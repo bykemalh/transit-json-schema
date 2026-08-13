@@ -6,6 +6,11 @@
     "route_id": {
       "type": "string"
     },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "URL-safe benzersiz tanımlayıcı, örn. 'bur-91'. API rotalarında kullanılır: /api/routes/{slug}"
+    },
     "agency_id": {
       "type": "string"
     },
@@ -69,6 +74,7 @@
   },
   "required": [
     "route_id",
+    "slug",
     "agency_id",
     "name",
     "vehicle_type",
