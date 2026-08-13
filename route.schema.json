@@ -15,7 +15,18 @@
       "type": "string"
     },
     "name": {
-      "type": "string"
+      "type": "object",
+      "properties": {
+        "tr": { "type": "string" },
+        "en": { "type": "string" }
+      },
+      "required": [
+        "tr"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Çoklu dil isim nesnesi. 'tr' zorunludur, diğer dil kodları (en, ar, de vb.) opsiyoneldir."
     },
     "code": {
       "type": ["string", "null"]
@@ -45,7 +56,7 @@
     },
     "fare_id": {
       "type": ["string", "null"],
-      "description": "Bu hat için geçerli ücret tanımı. fares.json'daki fare_id'ye referans verir. Opsiyonel/null — yoksa agency'nin varsayılan ücret tanımı kullanılır."
+      "description": "Bu hat için geçerli ücret tanımı. fares.json'daki fare_id'ye referans verir. Opsiyonel/null — yoksa bu hat için tanımlı özel bir ücret yok kabul edilir."
     },
     "route_pattern": {
       "type": "string",
@@ -68,7 +79,7 @@
       "format": "date-time"
     },
     "source": {
-      "type": ["string", "null"]
+      "type": "string"
     }
 
   },
