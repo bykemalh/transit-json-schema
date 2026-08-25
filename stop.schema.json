@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TransitJSON Stop",
   "description": "TransitJSON v2 — Durak. Erişilebilirlik flag'leri, fiziksel özellikler ve opsiyonel platform dizisi içerir. Tüm yeni alanlar opsiyoneldir; mevcut v1 kayıtları eksik/null bırakılarak da geçerlidir.",
   "type": "object",

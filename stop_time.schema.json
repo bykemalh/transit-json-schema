@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TransitJSON StopTime",
   "description": "İlk durak (sequence=1) için departure_time zorunludur. Diğer tüm duraklar (son durak dahil) için opsiyoneldir.",
   "type": "object",
@@ -45,11 +45,7 @@
   },
   "then": {
     "required": [
-      "trip_id",
-      "stop_id",
-      "sequence",
-      "departure_time",
-      "updated_at"
+      "departure_time"
     ],
     "properties": {
       "departure_time": {

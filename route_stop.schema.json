@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TransitJSON RouteStop",
   "description": "Hat-Durak çok-çoğa ilişkisi. Bir durak birden fazla hatta ait olabilir; bir hat birden fazla durağa sahip olabilir.",
   "type": "object",

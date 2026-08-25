@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TransitJSON Trip",
   "description": "Bir hatta ait somut, tek bir sefer. Frekanslı hatlarda bu kayıtlar bir generator script ile önceden üretilir, elle girilmez. Kapsam sınırı (v1): trip ayrı bir shape veya route_stop varyantına bağlanmaz; aynı route_id + direction altındaki tüm seferler tek shape ve tek route_stops dizisini paylaşır. Short-turn, branch ve varyant güzergâhlar v1'de desteklenmez.",
   "type": "object",

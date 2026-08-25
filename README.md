@@ -1,6 +1,6 @@
 # TransitJSON Schemas
 
-JSON Schema (draft-07) definitions for **TransitJSON**, a JSON-based data format for describing public transit networks. TransitJSON is designed as a simpler, JSON-native alternative to GTFS, while keeping GTFS-compatible concepts (stops, routes, trips, stop times, shapes, fares).
+JSON Schema (draft 2020-12) definitions for **TransitJSON**, a JSON-based data format for describing public transit networks. TransitJSON is designed as a simpler, JSON-native alternative to GTFS, while keeping GTFS-compatible concepts (stops, routes, trips, stop times, shapes, fares).
 
 ## Repository structure
 
@@ -43,7 +43,7 @@ Every file in this directory is a self-contained JSON Schema describing a single
 
 ## Validation
 
-All schemas target [JSON Schema draft-07](http://json-schema.org/draft-07/schema#) and can be used with any compliant validator. For example:
+All schemas target [JSON Schema draft 2020-12](https://json-schema.org/draft/2020-12/schema) and can be used with any compliant validator. For example:
 
 ```bash
 npx ajv -s stop.schema.json -d data/stops.json --strict=false

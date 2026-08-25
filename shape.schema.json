@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TransitJSON Shape",
   "description": "Rota geometrisi. Doğrudan lat/lon koordinat dizisi kullanılır; encoded polyline yoktur. Kapsam sınırı (v1): her route_id + direction için tek shape vardır; trip bazlı varyant güzergâh yoktur.",
   "type": "object",

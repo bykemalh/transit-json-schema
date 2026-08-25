@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TransitJSON Fare",
   "description": "Ücret tanımı. Bir agency'nin farklı yolcu profilleri (tam, öğrenci, 65+) için ayrı fare kayıtları oluşturulur. Tüm hatlarda başlangıçtan sona kadar sabit (flat) ücret uygulanır.",
   "type": "object",
