@@ -16,5 +16,9 @@
     "stop",
     "stop_time",
     "trip"
+  ],
+  "realtime_entities": [
+    "announcement",
+    "vehicle"
   ]
 }

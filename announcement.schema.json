@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TransitJSON Announcement",
+  "description": "Duyuru: uygulama, web sitesi, durak ekranı ve istasyon anonsları için yayın metni. Hem bilgi yayınları (yeni hat açılışı, etkinlik, tarife kampanyası) hem de kesinti, iptal ve rötar gibi servis bildirimleri bu şema üzerinden yapılır.",
+  "type": "object",
+  "properties": {
+    "announcement_id": {
+      "type": "string",
+      "description": "Proje genelinde tekil. Örn. 'BUR-ANN-2026-0017'."
+    },
+    "city_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Duyurunun ait olduğu şehir (cities.json içindeki city_id). null = şehre bağlı değil."
+    },
+    "agency_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Duyuruyu yapan işletmeci (agencies.json içindeki agency_id). null = şehir geneli/belirli bir işletmeye bağlı değil."
+    },
+    "message": {
+      "type": "object",
+      "properties": {
+        "tr": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "tr"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Duyuru metni. Çoklu dil nesnesi. 'tr' zorunludur. Örn. {'tr': 'M1 hattında yeni istasyon açıldı', 'en': 'New station opened on line M1'}."
+    },
+    "type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "info",
+        "new_service",
+        "event",
+        "campaign",
+        "safety",
+        "other",
+        null
+      ],
+      "description": "info: genel bilgilendirme. new_service: yeni hat/istasyon/durak. event: etkinlik kaynaklı duyuru. campaign: ücret/kampanya duyurusu. safety: güvenlik mesajı. null = belirtilmemiş."
+    },
+    "channels": {
+      "type": "array",
+      "description": "Duyurunun yayınlanacağı kanallar. Boş dizi veya yazılmamışsa tüm kanallar kabul edilir.",
+      "items": {
+        "type": "string",
+        "enum": [
+          "app",
+          "website",
+          "stop_display",
+          "station_audio",
+          "sms"
+        ]
+      },
+      "uniqueItems": true,
+      "description": "app: mobil uygulama bildirimi. website: web sitesi. stop_display: durak ekranı. station_audio: istasyon sesli anonsu. sms: kısa mesaj."
+    },
+    "targets": {
+      "type": "array",
+      "description": "Duyurunun ilgili olduğu varlıklar. Boş dizi = tüm ağ (şehir geneli duyuru).",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "agency",
+              "route",
+              "stop"
+            ],
+            "description": "İlgili varlık türü."
+          },
+          "ref_id": {
+            "type": "string",
+            "description": "İlgili entity'nin kimliği: agency_id, route_id veya stop_id."
+          }
+        },
+        "required": [
+          "type",
+          "ref_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "priority": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "low",
+        "normal",
+        "high",
+        null
+      ],
+      "description": "Görüntüleme önceliği: low: arka planda listelenir. normal: standart sıra. high: üstte/öne çıkan gösterilir. null = normal kabul edilir."
+    },
+    "active_from": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Duyurunun yayına girme zamanı (RFC 3339). null = hemen."
+    },
+    "active_until": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time",
+      "description": "Duyurunun yayından kalkma zamanı (RFC 3339). null = süresiz/el ile kaldırılacak."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Bu duyuru kaydının son güncellendiği an (RFC 3339)."
+    },
+    "source": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "announcement_id",
+    "message",
+    "targets",
+    "updated_at"
+  ],
+  "additionalProperties": false
+}

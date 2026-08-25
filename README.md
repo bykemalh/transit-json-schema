@@ -20,6 +20,17 @@ Every file in this directory is a self-contained JSON Schema describing a single
 | `fare.schema.json` | `fare` | Fare definition: flat pricing, currency, payment methods, transfer rules. |
 | `holiday.schema.json` | `holiday` | Official holidays and which weekday schedule they apply as (default: Sunday). |
 
+## Realtime entities
+
+Realtime schemas describe short-lived, point-in-time records that consumers poll regularly. They are conceptually aligned with [GTFS-Realtime](https://gtfs.org/realtime/) but use plain JSON snapshots instead of protobuf feeds.
+
+| File | Entity | Description |
+| --- | --- | --- |
+| `vehicle.schema.json` | `vehicle` | Live vehicle position: coordinates, bearing, speed, license plate, trip/route link, stop approach status, occupancy (GTFS-RT VehiclePosition analog). |
+| `announcement.schema.json` | `announcement` | Broadcast text for apps, websites, stop displays and station audio: informational notices as well as service disruptions (cancellations, delays, detours). |
+
+Unlike static entities, realtime records carry absolute RFC 3339 timestamps in `updated_at` and are not archived — each update replaces the previous record with the same id.
+
 ## Conventions
 
 - **IDs** (`*_id`) are strings, unique project-wide where noted.

@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TransitJSON Vehicle",
+  "description": "Gerçek zamanlı araç konumu (anlık görüntü kaydı). Tüketici uygulamalar bu kayıtları düzenli aralıklarla çekerek haritada canlı araç konumunu gösterir. Kayıtlar kısa ömürlüdür; her güncelleme aynı vehicle_id ile üzerine yazar, geçmiş tutulmaz. GTFS-Realtime VehiclePosition kavramının JSON karşılığıdır.",
+  "type": "object",
+  "properties": {
+    "vehicle_id": {
+      "type": "string",
+      "description": "Fiziksel aracın tekil kimliği. Örn. 'BUR-91M-4025'. Aynı aracın ardışık konum güncellemeleri aynı vehicle_id'yi taşır."
+    },
+    "license_plate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Aracın plakası. Örn. '16 BUR 4025'. null = bilinmiyor/paylaşılmıyor."
+    },
+    "trip_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Aracın şu an yaptığı sefer (trips.json içindeki trip_id). null = aktif bir sefere bağlı değil (depo çıkışı/garaja dönüş vb.)."
+    },
+    "route_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Aracın bulunduğu hat (routes.json içindeki route_id). Seferden türetilebilir; sorgu kolaylığı için tekrarlanır."
+    },
+    "direction": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        null
+      ],
+      "description": "0: loop (tek yön döngü), 1: gidiş, 2: dönüş. null = bilinmiyor."
+    },
+    "position": {
+      "type": "object",
+      "description": "Aracın anlık konumu.",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "lon": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "bearing": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 360,
+          "description": "Gidiş yönü, kuzeyden saat yönünde derece. Kuzey=0, doğu=90, güney=180, batı=270. null veya yazılmamışsa = bilinmiyor."
+        },
+        "speed_kmh": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Anlık hız (km/saat). null = bilinmiyor."
+        }
+      },
+      "required": [
+        "lat",
+        "lon"
+      ],
+      "additionalProperties": false
+    },
+    "current_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "incoming_at",
+        "stopped_at",
+        "in_transit_to",
+        null
+      ],
+      "description": "incoming_at: stop_id alanındaki durağa yaklaşıyor. stopped_at: stop_id alanındaki durakta bekliyor. in_transit_to: stop_id alanındaki durağa doğru yolda. null = bilinmiyor."
+    },
+    "stop_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "current_status'a göre anlam kazanır: stopped_at ise aracın bulunduğu durak, aksi halde varış hedefindeki durak (stops.json içindeki stop_id)."
+    },
+    "occupancy": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "empty",
+        "many_seats_available",
+        "few_seats_available",
+        "standing_room_only",
+        "crushed_standing_room_only",
+        "full",
+        "not_accepting_passengers",
+        null
+      ],
+      "description": "Araç içi doluluk seviyesi (GTFS-Realtime OccupancyStatus uyumlu). null = bilinmiyor."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Bu konum bilgisinin üretildiği/alındığı an (RFC 3339). Statik verilerden farklı olarak gerçek zamanlı kayıtlarda mutlak zaman damgası kullanılır."
+    },
+    "source": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "vehicle_id",
+    "position",
+    "updated_at"
+  ],
+  "additionalProperties": false
+}
