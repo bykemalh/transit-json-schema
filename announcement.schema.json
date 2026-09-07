@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TransitJSON Announcement",
-  "description": "Duyuru: uygulama, web sitesi, durak ekranı ve istasyon anonsları için yayın metni. Hem bilgi yayınları (yeni hat açılışı, etkinlik, tarife kampanyası) hem de kesinti, iptal ve rötar gibi servis bildirimleri bu şema üzerinden yapılır.",
+  "description": "Duyuru: uygulama, web sitesi, durak ekranı ve istasyon anonsları için yayın metni. Hem bilgi yayınları (yeni hat açılışı, etkinlik, tarife kampanyası) hem de kesinti, iptal ve rötar gibi servis bildirimleri bu şema üzerinden yapılır. Hat bazlı duyurular targets içinde type=route kayıtlarıyla kurulur; bir duyuru birden fazla hattı kapsayabilir (M:N). targets boş dizi ise şehir geneli duyurudur.",
   "type": "object",
   "properties": {
     "announcement_id": {
@@ -56,6 +56,23 @@
       ],
       "description": "info: genel bilgilendirme. new_service: yeni hat/istasyon/durak. event: etkinlik kaynaklı duyuru. campaign: ücret/kampanya duyurusu. safety: güvenlik mesajı. null = belirtilmemiş."
     },
+    "effect": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "no_service",
+        "reduced_service",
+        "detour",
+        "delay",
+        "stop_moved",
+        "cancellation",
+        "other",
+        null
+      ],
+      "description": "Operasyonel etki (type kategorisinden bağımsız). no_service: hat tamamen durdu. reduced_service: sefer azaltma/seyrekleştirme. detour: güzergah değişikliği/sapma. delay: gecikme. stop_moved: durak taşındı/geçici durak. cancellation: sefer iptali. other: diğer. null = operasyonel etki yok/belirtilmemiş (saf bilgilendirme)."
+    },
     "channels": {
       "type": "array",
       "description": "Duyurunun yayınlanacağı kanallar. Boş dizi veya yazılmamışsa tüm kanallar kabul edilir.",
@@ -74,7 +91,7 @@
     },
     "targets": {
       "type": "array",
-      "description": "Duyurunun ilgili olduğu varlıklar. Boş dizi = tüm ağ (şehir geneli duyuru).",
+      "description": "Duyurunun ilgili olduğu varlıklar. Boş dizi = tüm ağ (şehir geneli duyuru). Hat bazlı duyuru için type=route olan en az bir kayıt ekleyin; bir duyuru birden fazla hattı kapsayabilir (M:N). Örn. [{'type':'route','ref_id':'BUR_91','direction':1}] sadece 91 hattı gidiş yönünü etkiler.",
       "items": {
         "type": "object",
         "properties": {
@@ -90,13 +107,47 @@
           "ref_id": {
             "type": "string",
             "description": "İlgili entity'nin kimliği: agency_id, route_id veya stop_id."
+          },
+          "direction": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "enum": [
+              0,
+              1,
+              2,
+              null
+            ],
+            "description": "Sadece type=route iken anlamlıdır. 0: loop (tek yön döngü), 1: gidiş, 2: dönüş. null veya yazılmamışsa = iki yön de etkilenir. agency/stop hedeflerinde kullanılmaz."
           }
         },
         "required": [
           "type",
           "ref_id"
         ],
-        "additionalProperties": false
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "route"
+                }
+              }
+            },
+            "then": true,
+            "else": {
+              "properties": {
+                "direction": {
+                  "enum": [
+                    null
+                  ]
+                }
+              }
+            }
+          }
+        ]
       }
     },
     "priority": {
