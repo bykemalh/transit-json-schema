@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TransitJSON RoutePattern",
+  "description": "Bir hattın belirli bir yöndeki somut güzergâh varyantı. Aynı route_id ve direction altında kısa dönüş, dal, ekspres veya farklı durak/shape dizileri ayrı pattern kayıtlarıdır.",
+  "type": "object",
+  "properties": {
+    "pattern_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "TransitJSON genelinde benzersiz ve ETL çalışmaları arasında kararlı güzergâh varyantı kimliği."
+    },
+    "route_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "direction": {
+      "type": "integer",
+      "enum": [0, 1, 2],
+      "description": "0: tek/atanmamış yön, 1: gidiş, 2: dönüş. Döngü bilgisi direction yerine is_loop ile ifade edilir."
+    },
+    "code": {
+      "type": ["string", "null"],
+      "description": "Kaynak sistemdeki güzergâh kodu; örn. İETT GUZERGAH_KODU."
+    },
+    "name": {
+      "type": ["object", "null"],
+      "properties": {
+        "tr": { "type": "string" },
+        "en": { "type": "string" }
+      },
+      "required": ["tr"],
+      "additionalProperties": { "type": "string" }
+    },
+    "headsign": {
+      "type": ["string", "null"],
+      "description": "Bu varyant için yolcuya gösterilen hedef/yön metni."
+    },
+    "shape_id": {
+      "type": ["string", "null"],
+      "description": "shapes.json içindeki geometriye referans. Geometri bulunmayan kaynaklarda null olabilir."
+    },
+    "is_loop": {
+      "type": "boolean",
+      "description": "Güzergâhın kendi üzerine kapanan/ring bir varyant olup olmadığı."
+    },
+    "is_default": {
+      "type": "boolean",
+      "description": "Eski route+direction tüketicileri için seçilecek varsayılan varyant. Her route_id+direction grubunda en fazla bir kayıt true olmalıdır."
+    },
+    "is_active": {
+      "type": "boolean",
+      "description": "Kaynak sistemde bu güzergâh varyantının etkin olup olmadığı."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "pattern_id",
+    "route_id",
+    "direction",
+    "is_loop",
+    "is_default",
+    "is_active",
+    "updated_at"
+  ],
+  "additionalProperties": false
+}

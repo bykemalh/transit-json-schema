@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TransitJSON PatternStop",
+  "description": "Bir güzergâh varyantının sıralı durakları. Aynı durak bir loop pattern içinde farklı sequence değerleriyle birden fazla kez bulunabilir.",
+  "type": "object",
+  "properties": {
+    "pattern_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stop_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "is_first_stop": {
+      "type": "boolean"
+    },
+    "is_last_stop": {
+      "type": "boolean"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "pattern_id",
+    "stop_id",
+    "sequence",
+    "updated_at"
+  ],
+  "additionalProperties": false
+}

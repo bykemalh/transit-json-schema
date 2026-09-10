@@ -64,7 +64,7 @@
         "round_trip",
         "loop"
       ],
-      "description": "round_trip: gidiş/dönüş (direction 1/2). loop: ring hat, tek yön (direction 0), başlangıç=bitiş."
+      "description": "Geriye uyumlu hat topolojisi sınıflandırmasıdır; route_patterns koleksiyonundaki güzergâh varyantı ile karıştırılmamalıdır. round_trip: genel olarak çift yönlü hat, loop: genel olarak ring hat. Bir hattın farklı varyantları için kesin loop bilgisi route_patterns.is_loop alanındadır."
     },
     "stop_mode": {
       "type": "string",

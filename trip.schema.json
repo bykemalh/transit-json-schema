@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TransitJSON Trip",
-  "description": "Bir hatta ait somut, tek bir sefer. Frekanslı hatlarda bu kayıtlar bir generator script ile önceden üretilir, elle girilmez. Kapsam sınırı (v1): trip ayrı bir shape veya route_stop varyantına bağlanmaz; aynı route_id + direction altındaki tüm seferler tek shape ve tek route_stops dizisini paylaşır. Short-turn, branch ve varyant güzergâhlar v1'de desteklenmez.",
+  "description": "Bir hatta ve güzergâh varyantına ait somut sefer. route_id ve direction alanları geriye uyumluluk ve hızlı filtreleme için pattern kaydıyla birlikte taşınır.",
   "type": "object",
   "properties": {
     "trip_id": {
@@ -10,6 +10,11 @@
     "route_id": {
       "type": "string"
     },
+    "pattern_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "route_patterns.json içindeki güzergâh varyantına referans."
+    },
     "direction": {
       "type": "integer",
       "enum": [
@@ -17,7 +22,7 @@
         1,
         2
       ],
-      "description": "0: loop (tek yön döngü), 1: gidiş, 2: dönüş."
+      "description": "0: tek/atanmamış yön, 1: gidiş, 2: dönüş. Ring bilgisi route pattern üzerindeki is_loop alanındadır."
     },
     "service_type": {
       "type": "string",
@@ -43,6 +48,7 @@
   "required": [
     "trip_id",
     "route_id",
+    "pattern_id",
     "direction",
     "service_type",
     "updated_at"
