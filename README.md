@@ -67,3 +67,7 @@ All schemas target [JSON Schema draft 2020-12](https://json-schema.org/draft/202
 ```bash
 npx ajv -s stop.schema.json -d data/stops.json --strict=false
 ```
+
+## License
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.

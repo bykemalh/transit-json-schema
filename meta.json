@@ -4,6 +4,7 @@
   "schema_draft": "https://json-schema.org/draft/2020-12/schema",
   "updated_at": "2026-09-09",
   "description": "JSON Schema definitions for TransitJSON, a JSON-based format for public transit data.",
+  "license": "MIT",
   "entities": [
     "agency",
     "city",
