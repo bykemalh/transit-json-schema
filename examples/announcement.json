@@ -1,0 +1,27 @@
+{
+  "announcement_id": "BUR-ANN-2026-0017",
+  "city_id": "BUR-16",
+  "agency_id": "BURULAS",
+  "message": {
+    "tr": "93 hattında güzergah değişikliği",
+    "en": "Detour on route 93"
+  },
+  "type": "info",
+  "effect": "detour",
+  "channels": [
+    "app",
+    "stop_display"
+  ],
+  "targets": [
+    {
+      "type": "route",
+      "ref_id": "BUR-93",
+      "direction": 1
+    }
+  ],
+  "priority": "high",
+  "active_from": "2026-09-12T00:00:00Z",
+  "active_until": "2026-09-20T00:00:00Z",
+  "updated_at": "2026-09-12T09:00:00Z",
+  "source": "https://acikveri.bursa.bel.tr"
+}

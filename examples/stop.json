@@ -1,0 +1,47 @@
+[
+  {
+    "stop_id": "BUR-01023",
+    "city_id": "BUR-16",
+    "name": {
+      "tr": "Kent Meydanı",
+      "en": "Kent Square"
+    },
+    "lat": 40.1956,
+    "lon": 29.0605,
+    "location_type": "stop",
+    "wheelchair_accessible": true,
+    "has_ramp": true,
+    "shelter_type": "closed",
+    "has_bench": true,
+    "has_real_time_display": true,
+    "platforms": [
+      {
+        "platform_id": "BUR-01023-P1",
+        "code": "A",
+        "direction": 1,
+        "lat": 40.1956,
+        "lon": 29.0605,
+        "wheelchair_accessible": true,
+        "updated_at": "2026-09-12T09:00:00Z"
+      }
+    ],
+    "updated_at": "2026-09-12T09:00:00Z",
+    "source": "https://acikveri.bursa.bel.tr"
+  },
+  {
+    "stop_id": "BUR-01024",
+    "city_id": "BUR-16",
+    "name": {
+      "tr": "Heykel",
+      "en": "Heykel"
+    },
+    "lat": 40.1833,
+    "lon": 29.071,
+    "location_type": "stop",
+    "wheelchair_accessible": true,
+    "shelter_type": "open",
+    "has_bench": true,
+    "updated_at": "2026-09-12T09:00:00Z",
+    "source": "https://acikveri.bursa.bel.tr"
+  }
+]

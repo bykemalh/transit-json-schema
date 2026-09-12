@@ -1,0 +1,9 @@
+{
+  "trip_id": "BUR-93-P1-monday-0600",
+  "route_id": "BUR-93",
+  "pattern_id": "BUR-93-P1",
+  "direction": 1,
+  "service_type": "monday",
+  "updated_at": "2026-09-12T09:00:00Z",
+  "source": "https://acikveri.bursa.bel.tr"
+}

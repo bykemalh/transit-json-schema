@@ -1,0 +1,18 @@
+{
+  "vehicle_id": "BUR-93M-4025",
+  "license_plate": "16 BUR 4025",
+  "trip_id": "BUR-93-P1-monday-0600",
+  "route_id": "BUR-93",
+  "direction": 1,
+  "position": {
+    "lat": 40.19,
+    "lon": 29.065,
+    "bearing": 90,
+    "speed_kmh": 32
+  },
+  "current_status": "in_transit_to",
+  "stop_id": "BUR-01024",
+  "occupancy": "few_seats_available",
+  "updated_at": "2026-09-12T09:00:00Z",
+  "source": "https://acikveri.bursa.bel.tr"
+}

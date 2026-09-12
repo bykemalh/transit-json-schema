@@ -1,15 +1,17 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "TransitJSON Holiday",
-  "description": "Resmi tatil günleri. Sabit kural: resmi tatil = Pazar günü sefer programı uygulanır.",
+  "title": "TransitJSON Calendar",
+  "description": "İşletmeci bazlı takvim istisnası. Resmi tatil ve özel günlerde hangi hafta günü sefer programının (trip.service_type) geçerli olduğunu belirtir.",
   "type": "object",
   "properties": {
     "date": {
       "type": "string",
-      "format": "date"
+      "format": "date",
+      "description": "İstisna tarihi (YYYY-MM-DD). Örn. 2026-10-29."
     },
-    "country_id": {
-      "type": "string"
+    "agency_id": {
+      "type": "string",
+      "description": "Bu takvim kaydının ait olduğu işletmeci (agencies.json içindeki agency_id)."
     },
     "name": {
       "type": "object",
@@ -40,7 +42,7 @@
         "saturday",
         "sunday"
       ],
-      "description": "O gün hangi günün sefer programının uygulanacağı.",
+      "description": "O gün hangi günün sefer programının uygulanacağı (trips.json içindeki service_type ile eşleşir).",
       "default": "sunday"
     },
     "updated_at": {
@@ -53,7 +55,7 @@
   },
   "required": [
     "date",
-    "country_id",
+    "agency_id",
     "name",
     "applies_as",
     "updated_at"

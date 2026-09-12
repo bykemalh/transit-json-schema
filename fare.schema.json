@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TransitJSON Fare",
-  "description": "Ücret tanımı. Bir agency'nin farklı yolcu profilleri (tam, öğrenci, 65+) için ayrı fare kayıtları oluşturulur. Tüm hatlarda başlangıçtan sona kadar sabit (flat) ücret uygulanır.",
+  "description": "Ücret tanımı. Bir agency'nin farklı yolcu profilleri için ayrı fare kayıtları oluşturulur. Standart kategoriler: standard (tam/normal), student (öğrenci), bank_card (kredi/banka kartı). Bu 3 kategori zorunlu değildir ama kullanılıyorsa category alanı ve fare_id soneki standart değere sahip olmalıdır. Ekstra kategoriler serbesttir. Tüm hatlarda başlangıçtan sona kadar sabit (flat) ücret uygulanır.",
   "type": "object",
   "properties": {
     "fare_id": {
       "type": "string",
-      "description": "Proje genelinde tekil. Örn. 'BUR-tam', 'BUR-ogrenci'."
+      "description": "Proje genelinde tekil. Standart kayıtlar '{AGENCY}-standard', '{AGENCY}-student', '{AGENCY}-bank_card' formatındadır. Örn. 'BUR-standard', 'BUR-student', 'BUR-bank_card'."
     },
     "agency_id": {
       "type": "string",
@@ -36,6 +36,15 @@
         "flat"
       ],
       "description": "flat: sabit ücret (tüm hat boyunca aynı fiyat)."
+    },
+    "category": {
+      "type": "string",
+      "description": "Ücret kategorisi. Standart değerler: standard (tam/normal hesap), student (öğrenci hesabı), bank_card (kredi/banka kartı ile ödeme). Bu 3 değerden biri kullanılıyorsa fare_id soneki de eşleşmelidir (örn. category=student ise fare_id '{AGENCY}-student'). Standart dışı ek kategoriler serbesttir (kısıt yok); category opsiyoneldir, yazılmayabilir.",
+      "examples": [
+        "standard",
+        "student",
+        "bank_card"
+      ]
     },
     "price": {
       "type": "number",

@@ -1,0 +1,17 @@
+{
+  "city_id": "BUR-16",
+  "slug": "bursa",
+  "country_id": "TR",
+  "name": {
+    "tr": "Bursa",
+    "en": "Bursa"
+  },
+  "timezone": "Europe/Istanbul",
+  "center": {
+    "lat": 40.195,
+    "lon": 29.0601
+  },
+  "default_zoom": 12,
+  "updated_at": "2026-09-12T09:00:00Z",
+  "source": "https://acikveri.bursa.bel.tr"
+}

@@ -1,0 +1,21 @@
+{
+  "shape_id": "BUR-93-S1",
+  "route_id": "BUR-93",
+  "direction": 1,
+  "coordinates": [
+    {
+      "lat": 40.1956,
+      "lon": 29.0605
+    },
+    {
+      "lat": 40.19,
+      "lon": 29.065
+    },
+    {
+      "lat": 40.1833,
+      "lon": 29.071
+    }
+  ],
+  "updated_at": "2026-09-12T09:00:00Z",
+  "source": "https://acikveri.bursa.bel.tr"
+}

@@ -1,0 +1,61 @@
+[
+  {
+    "fare_id": "BUR-standard",
+    "agency_id": "BURULAS",
+    "name": {
+      "tr": "Tam Bilet",
+      "en": "Full Ticket"
+    },
+    "fare_type": "flat",
+    "category": "standard",
+    "price": 40,
+    "currency": "TRY",
+    "payment_methods": [
+      "smart_card",
+      "cash"
+    ],
+    "transfer_duration": 60,
+    "transfer_limit": 2,
+    "updated_at": "2026-09-12T09:00:00Z",
+    "source": "https://acikveri.bursa.bel.tr"
+  },
+  {
+    "fare_id": "BUR-student",
+    "agency_id": "BURULAS",
+    "name": {
+      "tr": "Öğrenci",
+      "en": "Student"
+    },
+    "fare_type": "flat",
+    "category": "student",
+    "price": 10,
+    "currency": "TRY",
+    "payment_methods": [
+      "smart_card"
+    ],
+    "transfer_duration": 60,
+    "transfer_limit": 2,
+    "updated_at": "2026-09-12T09:00:00Z",
+    "source": "https://acikveri.bursa.bel.tr"
+  },
+  {
+    "fare_id": "BUR-bank_card",
+    "agency_id": "BURULAS",
+    "name": {
+      "tr": "Kredi Kartı",
+      "en": "Bank Card"
+    },
+    "fare_type": "flat",
+    "category": "bank_card",
+    "price": 48,
+    "currency": "TRY",
+    "payment_methods": [
+      "credit_card",
+      "contactless"
+    ],
+    "transfer_duration": null,
+    "transfer_limit": null,
+    "updated_at": "2026-09-12T09:00:00Z",
+    "source": "https://acikveri.bursa.bel.tr"
+  }
+]

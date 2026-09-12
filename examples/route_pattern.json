@@ -1,0 +1,16 @@
+{
+  "pattern_id": "BUR-93-P1",
+  "route_id": "BUR-93",
+  "direction": 1,
+  "code": "93-G",
+  "name": {
+    "tr": "93 Gidiş"
+  },
+  "headsign": "Heykel",
+  "shape_id": "BUR-93-S1",
+  "is_loop": false,
+  "is_default": true,
+  "is_active": true,
+  "updated_at": "2026-09-12T09:00:00Z",
+  "source": "https://acikveri.bursa.bel.tr"
+}

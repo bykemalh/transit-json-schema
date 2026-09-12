@@ -1,6 +1,6 @@
 # TransitJSON Schemas
 
-JSON Schema (draft 2020-12) definitions for **TransitJSON 0.4**, a JSON-based data format for describing public transit networks. TransitJSON is designed as a simpler, JSON-native alternative to GTFS, while keeping GTFS-compatible concepts (stops, routes, route patterns, trips, stop times, shapes, fares).
+JSON Schema (draft 2020-12) definitions for **TransitJSON 0.5**, a JSON-based data format for describing public transit networks. TransitJSON is designed as a simpler, JSON-native alternative to GTFS, while keeping GTFS-compatible concepts (stops, routes, route patterns, trips, stop times, shapes, fares).
 
 ## Repository structure
 
@@ -13,14 +13,13 @@ Every file in this directory is a self-contained JSON Schema describing a single
 | `agency.schema.json` | `agency` | Transit operator in a city (name, phone, website). |
 | `stop.schema.json` | `stop` | Stop or station (v2): accessibility flags, physical amenities, optional per-platform details. |
 | `route.schema.json` | `route` | Route: URL-safe slug, vehicle type, route pattern (round-trip / loop), stop mode (fixed / flexible), optional fare and color. |
-| `route_stop.schema.json` | `route_stop` | Many-to-many link between routes and stops, ordered per direction and sequence. |
 | `route_pattern.schema.json` | `route_pattern` | A concrete route variant such as a branch, short-turn, express or alternate alignment. |
 | `pattern_stop.schema.json` | `pattern_stop` | Ordered stops belonging to one route pattern. |
 | `trip.schema.json` | `trip` | A concrete scheduled trip (one service per weekday/service type). |
 | `stop_time.schema.json` | `stop_time` | Departure times per trip/stop/sequence; `departure_time` is required for the first stop. |
 | `shape.schema.json` | `shape` | Route geometry as an ordered array of `lat`/`lon` points (no encoded polylines). |
-| `fare.schema.json` | `fare` | Fare definition: flat pricing, currency, payment methods, transfer rules. |
-| `holiday.schema.json` | `holiday` | Official holidays and which weekday schedule they apply as (default: Sunday). |
+| `fare.schema.json` | `fare` | Fare definition: flat pricing, currency, payment methods, transfer rules. Standard fares: `*-standard`, `*-student`, `*-bank_card` (see `examples/fare.json`). |
+| `calendar.schema.json` | `calendar` | Agency-based calendar exceptions: which weekday schedule (`applies_as`) runs on holidays/special days (default: Sunday). |
 
 ## Realtime entities
 
@@ -35,11 +34,15 @@ Realtime schemas describe short-lived, point-in-time records that consumers poll
 
 Unlike static entities, realtime records carry absolute RFC 3339 timestamps in `updated_at` and are not archived — each update replaces the previous record with the same id. Tüketim için sadece HTTP üzerinden JSON çekmek yeterlidir.
 
+## Examples
+
+`examples/` holds Bursa-based sample records (city `bursa`, agency `BURULAS` / BURULAŞ AŞ), one file per entity named exactly like its schema (`city.json` matches `city.schema.json`, …). Files hold a single record or an array whose every record conforms to the matching `*.schema.json` (verified with AJV, draft 2020-12 + formats).
+
 ## Conventions
 
 - **IDs** (`*_id`) are strings, unique project-wide where noted.
 - **Slugs** (`city`, `route`) are URL-safe, lowercase identifiers matching `^[a-z0-9]+(-[a-z0-9]+)*$`, used in API routes.
-- **Direction codes** are used consistently across `route_pattern`, `trip`, `shape`, legacy `route_stop` and stop platforms:
+- **Direction codes** are used consistently across `route_pattern`, `trip`, `shape` and stop platforms:
   - `0` – single/unassigned direction
   - `1` – outbound
   - `2` – inbound
@@ -51,14 +54,15 @@ Unlike static entities, realtime records carry absolute RFC 3339 timestamps in `
 - All schemas set `additionalProperties: false` to keep records strict.
 - All property descriptions are in Turkish.
 
-## Route patterns and 0.3 compatibility
+## Route patterns and 0.5 notes
 
 - `route_patterns.json` is the canonical owner of a route variant; `pattern_stops.json` contains its stop order and `trips.pattern_id` selects it.
 - Multiple patterns and shapes may exist under the same `route_id` + `direction`.
 - `routes.route_pattern` is retained as a legacy route-level `round_trip` / `loop` classification. Exact loop state belongs to `route_patterns.is_loop`.
-- `route_stops.json` is retained as a compatibility projection of the default pattern for older consumers. New consumers must use `pattern_stops.json`.
+- `route_stops.json` was removed in 0.5. Use `pattern_stops.json`.
+- `holiday.json` was removed in 0.5. Use agency-based `calendar.json` (`date + agency_id -> applies_as`).
 - Shapes are plain coordinate arrays; encoded polyline is not used.
-- Fares are flat only: the same price applies from origin to destination on all routes.
+- Fares are flat only: the same price applies from origin to destination on all routes. Standard `fare_id` suffixes are `-standard`, `-student`, `-bank_card`; extra fares are allowed.
 
 ## Validation
 

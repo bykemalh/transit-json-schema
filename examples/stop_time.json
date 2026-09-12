@@ -1,0 +1,18 @@
+[
+  {
+    "trip_id": "BUR-93-P1-monday-0600",
+    "stop_id": "BUR-01023",
+    "sequence": 1,
+    "departure_time": "06:00:00",
+    "updated_at": "2026-09-12T09:00:00Z",
+    "source": "https://acikveri.bursa.bel.tr"
+  },
+  {
+    "trip_id": "BUR-93-P1-monday-0600",
+    "stop_id": "BUR-01024",
+    "sequence": 2,
+    "departure_time": "06:20:00",
+    "updated_at": "2026-09-12T09:00:00Z",
+    "source": "https://acikveri.bursa.bel.tr"
+  }
+]
