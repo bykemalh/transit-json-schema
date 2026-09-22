@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TransitJSON Fare",
-  "description": "Ücret tanımı. Bir agency'nin farklı yolcu profilleri için ayrı fare kayıtları oluşturulur. Standart kategoriler: standard (tam/normal), student (öğrenci), bank_card (kredi/banka kartı). Bu 3 kategori zorunlu değildir ama kullanılıyorsa category alanı ve fare_id soneki standart değere sahip olmalıdır. Ekstra kategoriler serbesttir. Tüm hatlarda başlangıçtan sona kadar sabit (flat) ücret uygulanır.",
+  "description": "Ücret tanımı. Her hat/kategori kombinasyonu için ayrı kayıt oluşturulur. tariff_group aktarma indirimi hesabında kullanılır (transfer_rule.schema.json). refund nesnesi BursaRay tarzı çıkış iadesi içindir ve aktarmadan tamamen bağımsızdır.",
   "type": "object",
   "properties": {
     "fare_id": {
       "type": "string",
-      "description": "Proje genelinde tekil. Standart kayıtlar '{AGENCY}-standard', '{AGENCY}-student', '{AGENCY}-bank_card' formatındadır. Örn. 'BUR-standard', 'BUR-student', 'BUR-bank_card'."
+      "description": "Proje genelinde tekil. Örn. 'BUR-BURSARAY-TAM', 'BUR-OTOBUS-OGRENCI'."
     },
     "agency_id": {
       "type": "string",
@@ -15,41 +15,48 @@
     "name": {
       "type": "object",
       "properties": {
-        "tr": {
-          "type": "string"
-        },
-        "en": {
-          "type": "string"
-        }
+        "tr": { "type": "string" },
+        "en": { "type": "string" }
       },
-      "required": [
-        "tr"
-      ],
-      "additionalProperties": {
-        "type": "string"
-      },
-      "description": "Çoklu dil isim nesnesi. 'tr' zorunludur, diğer dil kodları (en, ar, de vb.) opsiyoneldir. Örn. {'tr': 'Tam Bilet', 'en': 'Full Ticket'}."
+      "required": ["tr"],
+      "additionalProperties": { "type": "string" },
+      "description": "Çoklu dil isim nesnesi. 'tr' zorunludur."
     },
     "fare_type": {
       "type": "string",
-      "enum": [
-        "flat"
-      ],
-      "description": "flat: sabit ücret (tüm hat boyunca aynı fiyat)."
+      "enum": ["flat", "stop_count"],
+      "description": "flat: sabit ücret (tüm hat boyunca aynı fiyat). stop_count: durak sayısına göre kademeli ücret."
     },
     "category": {
       "type": "string",
-      "description": "Ücret kategorisi. Standart değerler: standard (tam/normal hesap), student (öğrenci hesabı), bank_card (kredi/banka kartı ile ödeme). Bu 3 değerden biri kullanılıyorsa fare_id soneki de eşleşmelidir (örn. category=student ise fare_id '{AGENCY}-student'). Standart dışı ek kategoriler serbesttir (kısıt yok); category opsiyoneldir, yazılmayabilir.",
+      "description": "Ücret kategorisi. Standart değerler: standard (tam/normal), reduced (indirimli), student (öğrenci), child (çocuk), senior (65 yaş üzeri), disabled (engelli), teacher (öğretmen), veteran (gazi/şehit yakını), bank_card (kredi/banka kartı), free (ücretsiz).",
       "examples": [
         "standard",
+        "reduced",
         "student",
-        "bank_card"
+        "child",
+        "senior",
+        "disabled",
+        "teacher",
+        "veteran",
+        "bank_card",
+        "free"
       ]
+    },
+    "tariff_group": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Bu ücretin ait olduğu tarife grubu (0, 1, 2... 9). Aktarma indirimi hesabında kullanılır (transfer_rule.from_tariff_groups). null = tarife grubu tanımlı değil."
+    },
+    "route_ids": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Bu ücretin geçerli olduğu hatlar (routes.json içindeki route_id'lere referans). null = ajansın tüm hatlarında geçerli."
     },
     "price": {
       "type": "number",
       "minimum": 0,
-      "description": "Sabit ücret. Hat boyunca başlangıçtan sona kadar değişmez."
+      "description": "Biniş ücreti. flat tipinde sabit fiyat. stop_count tipinde baz (tavan) fiyat."
     },
     "currency": {
       "type": "string",
@@ -71,28 +78,92 @@
       },
       "description": "Kabul edilen ödeme yöntemleri. cash: nakit, smart_card: kent kart/akbil, credit_card: kredi/banka kartı, mobile: mobil uygulama, contactless: temassız, qr: QR kod."
     },
-    "transfer_duration": {
-      "type": [
-        "integer",
-        "null"
-      ],
-      "minimum": 0,
-      "description": "Aktarma süresi (dakika). Bu süre içinde yapılan aktarmalarda ek ücret alınmaz. null = aktarma hakkı yok."
+    "tiers": {
+      "type": ["array", "null"],
+      "description": "fare_type=stop_count için kademeli fiyat tablosu. Sıralı olmalıdır. flat tip için null veya yazılmaz.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "min_stops": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Bu kademenin başladığı minimum durak sayısı."
+          },
+          "max_stops": {
+            "type": ["integer", "null"],
+            "minimum": 1,
+            "description": "Bu kademenin bittiği maksimum durak sayısı. null = ve üzeri."
+          },
+          "price": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Bu kademedeki net ücret."
+          }
+        },
+        "required": ["min_stops", "price"],
+        "additionalProperties": false
+      }
     },
-    "transfer_limit": {
-      "type": [
-        "integer",
-        "null"
+    "refund": {
+      "type": ["object", "null"],
+      "description": "Çıkış iadesi (BursaRay 'Gittiğin Kadar Öde' tarzı). Aktarmadan tamamen bağımsız bir mekanizma. null = iade yok.",
+      "properties": {
+        "only_first_leg": {
+          "type": "boolean",
+          "description": "true ise iade sadece bu hat ilk biniş olduğunda verilir. Aktarmayla geldiysen iade yok."
+        },
+        "duration_minutes": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "İade validatörüne okutma süresi (dakika). Biniş anından itibaren."
+        },
+        "eligible_categories": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Hangi yolcu kategorileri iade alabilir. Örn. ['standard']."
+        },
+        "excluded_route_ids": {
+          "type": ["array", "null"],
+          "items": { "type": "string" },
+          "description": "İade sistemine dahil olmayan hatlar. Örn. T2 tramvay. null = istisna yok."
+        },
+        "tiers": {
+          "type": "array",
+          "description": "Durak sayısına göre iade miktarı tablosu.",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "min_stops": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "max_stops": {
+                "type": ["integer", "null"],
+                "minimum": 1
+              },
+              "amount": {
+                "type": "number",
+                "minimum": 0,
+                "description": "İade miktarı."
+              }
+            },
+            "required": ["min_stops", "amount"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "only_first_leg",
+        "duration_minutes",
+        "eligible_categories",
+        "tiers"
       ],
-      "minimum": 0,
-      "description": "transfer_duration süresi içinde kaç aktarma hakkı var. null = sınırsız (süre dolana kadar)."
+      "additionalProperties": false
     },
     "updated_at": {
       "type": "string",
       "format": "date-time"
-    },
-    "source": {
-      "type": "string"
     }
   },
   "required": [
@@ -100,9 +171,24 @@
     "agency_id",
     "name",
     "fare_type",
+    "category",
     "price",
     "currency",
     "updated_at"
   ],
+  "if": {
+    "properties": {
+      "fare_type": { "const": "stop_count" }
+    }
+  },
+  "then": {
+    "required": ["tiers"],
+    "properties": {
+      "tiers": {
+        "type": "array",
+        "minItems": 1
+      }
+    }
+  },
   "additionalProperties": false
 }
