@@ -1,23 +1,15 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TransitJSON Shape",
-  "description": "Güzergâh geometrisi. Doğrudan lat/lon koordinat dizisi kullanılır; encoded polyline yoktur. Aynı route_id + direction altında birden fazla shape bulunabilir ve route_patterns.shape_id ile seçilir.",
+  "description": "Güzergâh geometrisi. Doğrudan lat/lon koordinat dizisi kullanılır; encoded polyline yoktur. route_patterns.shape_id ile seçilir.",
   "type": "object",
   "properties": {
     "shape_id": {
       "type": "string"
     },
     "route_id": {
-      "type": "string"
-    },
-    "direction": {
-      "type": "integer",
-      "enum": [
-        0,
-        1,
-        2
-      ],
-      "description": "0: loop (tek yön döngü), 1: gidiş, 2: dönüş."
+      "type": ["string", "null"],
+      "description": "Bu şeklin ait olduğu hat. Opsiyonel/null."
     },
     "coordinates": {
       "type": "array",
@@ -51,8 +43,6 @@
   },
   "required": [
     "shape_id",
-    "route_id",
-    "direction",
     "coordinates",
     "updated_at"
   ],
