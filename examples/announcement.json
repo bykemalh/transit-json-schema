@@ -15,8 +15,7 @@
   "targets": [
     {
       "type": "route",
-      "ref_id": "BUR-93",
-      "direction": 1
+      "ref_id": "BUR-93"
     }
   ],
   "priority": "high",

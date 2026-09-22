@@ -107,47 +107,13 @@
           "ref_id": {
             "type": "string",
             "description": "İlgili entity'nin kimliği: agency_id, route_id veya stop_id."
-          },
-          "direction": {
-            "type": [
-              "integer",
-              "null"
-            ],
-            "enum": [
-              0,
-              1,
-              2,
-              null
-            ],
-            "description": "Sadece type=route iken anlamlıdır. 0: loop (tek yön döngü), 1: gidiş, 2: dönüş. null veya yazılmamışsa = iki yön de etkilenir. agency/stop hedeflerinde kullanılmaz."
           }
         },
         "required": [
           "type",
           "ref_id"
         ],
-        "additionalProperties": false,
-        "allOf": [
-          {
-            "if": {
-              "properties": {
-                "type": {
-                  "const": "route"
-                }
-              }
-            },
-            "then": true,
-            "else": {
-              "properties": {
-                "direction": {
-                  "enum": [
-                    null
-                  ]
-                }
-              }
-            }
-          }
-        ]
+        "additionalProperties": false
       }
     },
     "priority": {
