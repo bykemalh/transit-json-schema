@@ -1,10 +1,11 @@
 {
   "name": "TransitJSON",
-  "format_version": "0.5.0",
+  "format_version": "0.6.0",
   "schema_draft": "https://json-schema.org/draft/2020-12/schema",
-  "updated_at": "2026-09-12",
+  "updated_at": "2026-09-22",
   "description": "JSON Schema definitions for TransitJSON, a JSON-based format for public transit data.",
   "license": "MIT",
+  "source": "",
   "entities": [
     "agency",
     "calendar",
@@ -17,6 +18,7 @@
     "shape",
     "stop",
     "stop_time",
+    "transfer_rule",
     "trip"
   ],
   "realtime_entities": [
