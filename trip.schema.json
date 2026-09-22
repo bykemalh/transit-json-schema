@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TransitJSON Trip",
-  "description": "Bir hatta ve güzergâh varyantına ait somut sefer. route_id ve direction alanları geriye uyumluluk ve hızlı filtreleme için pattern kaydıyla birlikte taşınır.",
+  "description": "Bir hatta ve güzergâh varyantına ait somut sefer. Sefer pattern_id üzerinden güzergâh varyantına bağlıdır; yön bilgisi pattern kaydından gelir. route_id hızlı filtreleme için denormalize olarak taşınır.",
   "type": "object",
   "properties": {
     "trip_id": {
@@ -13,16 +13,7 @@
     "pattern_id": {
       "type": "string",
       "minLength": 1,
-      "description": "route_patterns.json içindeki güzergâh varyantına referans."
-    },
-    "direction": {
-      "type": "integer",
-      "enum": [
-        0,
-        1,
-        2
-      ],
-      "description": "0: tek/atanmamış yön, 1: gidiş, 2: dönüş. Ring bilgisi route pattern üzerindeki is_loop alanındadır."
+      "description": "route_patterns.json içindeki güzergâh varyantına referans. Yön ve durak sırası bu kayıttan gelir."
     },
     "service_type": {
       "type": "string",
@@ -40,16 +31,12 @@
     "updated_at": {
       "type": "string",
       "format": "date-time"
-    },
-    "source": {
-      "type": "string"
     }
   },
   "required": [
     "trip_id",
     "route_id",
     "pattern_id",
-    "direction",
     "service_type",
     "updated_at"
   ],
