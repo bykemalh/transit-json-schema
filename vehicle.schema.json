@@ -121,9 +121,6 @@
       "type": "string",
       "format": "date-time",
       "description": "Bu konum bilgisinin üretildiği/alındığı an (RFC 3339). Statik verilerden farklı olarak gerçek zamanlı kayıtlarda mutlak zaman damgası kullanılır."
-    },
-    "source": {
-      "type": "string"
     }
   },
   "required": [
