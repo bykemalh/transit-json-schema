@@ -12,6 +12,9 @@
     "lon": 29.0601
   },
   "default_zoom": 12,
-  "updated_at": "2026-09-12T09:00:00Z",
-  "source": "https://acikveri.bursa.bel.tr"
+  "population": 3147818,
+  "region_code": "16",
+  "website": "https://www.bursa.bel.tr",
+  "open_data_url": "https://opendata.bursa.bel.tr",
+  "updated_at": "2026-09-22T10:00:00Z"
 }

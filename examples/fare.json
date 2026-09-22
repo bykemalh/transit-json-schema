@@ -1,61 +1,128 @@
 [
   {
-    "fare_id": "BUR-standard",
+    "fare_id": "BUR-BURSARAY-TAM",
     "agency_id": "BURULAS",
     "name": {
-      "tr": "Tam Bilet",
-      "en": "Full Ticket"
+      "tr": "BursaRay Tam Bilet",
+      "en": "BursaRay Full Fare"
     },
     "fare_type": "flat",
     "category": "standard",
-    "price": 40,
-    "currency": "TRY",
-    "payment_methods": [
-      "smart_card",
-      "cash"
+    "tariff_group": 0,
+    "route_ids": [
+      "BUR-M1",
+      "BUR-M2"
     ],
-    "transfer_duration": 60,
-    "transfer_limit": 2,
-    "updated_at": "2026-09-12T09:00:00Z",
-    "source": "https://acikveri.bursa.bel.tr"
-  },
-  {
-    "fare_id": "BUR-student",
-    "agency_id": "BURULAS",
-    "name": {
-      "tr": "Öğrenci",
-      "en": "Student"
-    },
-    "fare_type": "flat",
-    "category": "student",
-    "price": 10,
+    "price": 40.0,
     "currency": "TRY",
     "payment_methods": [
       "smart_card"
     ],
-    "transfer_duration": 60,
-    "transfer_limit": 2,
-    "updated_at": "2026-09-12T09:00:00Z",
-    "source": "https://acikveri.bursa.bel.tr"
+    "refund": {
+      "only_first_leg": true,
+      "duration_minutes": 90,
+      "eligible_categories": [
+        "standard"
+      ],
+      "excluded_route_ids": [
+        "BUR-T2"
+      ],
+      "tiers": [
+        {
+          "min_stops": 1,
+          "max_stops": 5,
+          "amount": 9.5
+        },
+        {
+          "min_stops": 6,
+          "max_stops": 11,
+          "amount": 4.0
+        },
+        {
+          "min_stops": 12,
+          "max_stops": null,
+          "amount": 0.0
+        }
+      ]
+    },
+    "updated_at": "2026-09-22T10:00:00Z"
   },
   {
-    "fare_id": "BUR-bank_card",
+    "fare_id": "BUR-OTOBUS-TAM",
     "agency_id": "BURULAS",
     "name": {
-      "tr": "Kredi Kartı",
-      "en": "Bank Card"
+      "tr": "Otobüs Tam Bilet",
+      "en": "Bus Full Fare"
     },
     "fare_type": "flat",
-    "category": "bank_card",
-    "price": 48,
+    "category": "standard",
+    "tariff_group": 1,
+    "route_ids": null,
+    "price": 25.0,
     "currency": "TRY",
     "payment_methods": [
+      "smart_card",
       "credit_card",
       "contactless"
     ],
-    "transfer_duration": null,
-    "transfer_limit": null,
-    "updated_at": "2026-09-12T09:00:00Z",
-    "source": "https://acikveri.bursa.bel.tr"
+    "refund": null,
+    "updated_at": "2026-09-22T10:00:00Z"
+  },
+  {
+    "fare_id": "BUR-OTOBUS-OGRENCI",
+    "agency_id": "BURULAS",
+    "name": {
+      "tr": "Otobüs Öğrenci Bilet",
+      "en": "Bus Student Fare"
+    },
+    "fare_type": "flat",
+    "category": "student",
+    "tariff_group": 1,
+    "route_ids": null,
+    "price": 15.0,
+    "currency": "TRY",
+    "payment_methods": [
+      "smart_card"
+    ],
+    "refund": null,
+    "updated_at": "2026-09-22T10:00:00Z"
+  },
+  {
+    "fare_id": "BUR-METRO-STOPCOUNT",
+    "agency_id": "BURULAS",
+    "name": {
+      "tr": "Metro Kademeli Ücret",
+      "en": "Metro Tiered Fare"
+    },
+    "fare_type": "stop_count",
+    "category": "standard",
+    "tariff_group": 0,
+    "route_ids": [
+      "BUR-M1"
+    ],
+    "price": 40.0,
+    "currency": "TRY",
+    "payment_methods": [
+      "smart_card"
+    ],
+    "tiers": [
+      {
+        "min_stops": 1,
+        "max_stops": 5,
+        "price": 30.5
+      },
+      {
+        "min_stops": 6,
+        "max_stops": 11,
+        "price": 36.0
+      },
+      {
+        "min_stops": 12,
+        "max_stops": null,
+        "price": 40.0
+      }
+    ],
+    "refund": null,
+    "updated_at": "2026-09-22T10:00:00Z"
   }
 ]

@@ -1,0 +1,110 @@
+[
+  {
+    "transfer_rule_id": "BUR-IND1-TAM",
+    "agency_id": "BURULAS",
+    "name": {
+      "tr": "Aktarma İndirimi 1 - Tam",
+      "en": "Transfer Discount 1 - Full"
+    },
+    "category": "standard",
+    "from_route_ids": null,
+    "to_route_ids": null,
+    "from_vehicle_types": null,
+    "to_vehicle_types": null,
+    "from_tariff_groups": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "discount_amount": 17.0,
+    "currency": "TRY",
+    "duration_minutes": 90,
+    "max_transfers": 3,
+    "terminates_chain": false,
+    "updated_at": "2026-09-22T10:00:00Z"
+  },
+  {
+    "transfer_rule_id": "BUR-IND0-TAM",
+    "agency_id": "BURULAS",
+    "name": {
+      "tr": "Aktarma İndirimi 0 - Tam",
+      "en": "Transfer Discount 0 - Full"
+    },
+    "category": "standard",
+    "from_route_ids": null,
+    "to_route_ids": null,
+    "from_vehicle_types": null,
+    "to_vehicle_types": null,
+    "from_tariff_groups": [
+      0
+    ],
+    "discount_amount": 30.0,
+    "currency": "TRY",
+    "duration_minutes": 90,
+    "max_transfers": 3,
+    "terminates_chain": false,
+    "updated_at": "2026-09-22T10:00:00Z"
+  },
+  {
+    "transfer_rule_id": "BUR-IND1-IND",
+    "agency_id": "BURULAS",
+    "name": {
+      "tr": "Aktarma İndirimi 1 - İndirimli",
+      "en": "Transfer Discount 1 - Reduced"
+    },
+    "category": "reduced",
+    "from_route_ids": null,
+    "to_route_ids": null,
+    "from_vehicle_types": null,
+    "to_vehicle_types": null,
+    "from_tariff_groups": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "discount_amount": 13.0,
+    "currency": "TRY",
+    "duration_minutes": 90,
+    "max_transfers": 3,
+    "terminates_chain": false,
+    "updated_at": "2026-09-22T10:00:00Z"
+  },
+  {
+    "transfer_rule_id": "BUR-T3-BUS-BLOCKED",
+    "agency_id": "BURULAS",
+    "name": {
+      "tr": "T3 Tramvayından Otobüse Aktarma Yok",
+      "en": "No Transfer from T3 Tram to Bus"
+    },
+    "category": "standard",
+    "from_route_ids": [
+      "BUR-T3"
+    ],
+    "to_route_ids": null,
+    "from_vehicle_types": [
+      "tram"
+    ],
+    "to_vehicle_types": [
+      "bus"
+    ],
+    "from_tariff_groups": null,
+    "discount_amount": 0.0,
+    "currency": "TRY",
+    "duration_minutes": 0,
+    "max_transfers": 0,
+    "terminates_chain": true,
+    "updated_at": "2026-09-22T10:00:00Z"
+  }
+]

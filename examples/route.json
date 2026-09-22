@@ -3,14 +3,15 @@
   "slug": "bur-93",
   "agency_id": "BURULAS",
   "name": {
-    "tr": "93 - Kent Meydanı - Heykel",
-    "en": "93 - Kent Square - Heykel"
+    "tr": "Kent Meydanı - Heykel",
+    "en": "Kent Square - Heykel"
   },
+  "code": "93",
+  "color": "#E30613",
+  "sort_order": 1,
   "vehicle_type": "bus",
-  "fare_id": "BUR-standard",
+  "fare_id": "BUR-OTOBUS-TAM",
   "route_pattern": "round_trip",
   "stop_mode": "fixed",
-  "color": "#E30613",
-  "updated_at": "2026-09-12T09:00:00Z",
-  "source": "https://acikveri.bursa.bel.tr"
+  "updated_at": "2026-09-22T10:00:00Z"
 }

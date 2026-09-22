@@ -5,8 +5,7 @@
     "sequence": 1,
     "is_first_stop": true,
     "is_last_stop": false,
-    "updated_at": "2026-09-12T09:00:00Z",
-    "source": "https://acikveri.bursa.bel.tr"
+    "updated_at": "2026-09-22T10:00:00Z"
   },
   {
     "pattern_id": "BUR-93-P1",
@@ -14,7 +13,6 @@
     "sequence": 2,
     "is_first_stop": false,
     "is_last_stop": true,
-    "updated_at": "2026-09-12T09:00:00Z",
-    "source": "https://acikveri.bursa.bel.tr"
+    "updated_at": "2026-09-22T10:00:00Z"
   }
 ]

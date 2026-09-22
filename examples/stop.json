@@ -1,5 +1,53 @@
 [
   {
+    "stop_id": "BUR-STA-OSMANGAZI",
+    "city_id": "BUR-16",
+    "name": {
+      "tr": "Osmangazi İstasyonu",
+      "en": "Osmangazi Station"
+    },
+    "lat": 40.194,
+    "lon": 29.055,
+    "location_type": "station",
+    "parent_station": null,
+    "wheelchair_accessible": true,
+    "has_elevator": true,
+    "has_tactile_paving": true,
+    "shelter_type": "closed",
+    "has_bench": true,
+    "has_real_time_display": true,
+    "platforms": [
+      {
+        "platform_id": "BUR-STA-OSMANGAZI-P1",
+        "code": "1",
+        "pattern_ids": [
+          "BUR-M1-GDS"
+        ],
+        "lat": 40.1941,
+        "lon": 29.0552,
+        "wheelchair_accessible": true,
+        "has_elevator": true,
+        "updated_at": "2026-09-22T10:00:00Z"
+      }
+    ],
+    "updated_at": "2026-09-22T10:00:00Z"
+  },
+  {
+    "stop_id": "BUR-ENT-OSMANGAZI-A",
+    "city_id": "BUR-16",
+    "name": {
+      "tr": "Osmangazi A Kapısı",
+      "en": "Osmangazi Gate A"
+    },
+    "lat": 40.1945,
+    "lon": 29.055,
+    "location_type": "entrance",
+    "parent_station": "BUR-STA-OSMANGAZI",
+    "wheelchair_accessible": true,
+    "has_ramp": true,
+    "updated_at": "2026-09-22T10:00:00Z"
+  },
+  {
     "stop_id": "BUR-01023",
     "city_id": "BUR-16",
     "name": {
@@ -9,6 +57,7 @@
     "lat": 40.1956,
     "lon": 29.0605,
     "location_type": "stop",
+    "parent_station": null,
     "wheelchair_accessible": true,
     "has_ramp": true,
     "shelter_type": "closed",
@@ -18,15 +67,16 @@
       {
         "platform_id": "BUR-01023-P1",
         "code": "A",
-        "direction": 1,
+        "pattern_ids": [
+          "BUR-93-P1"
+        ],
         "lat": 40.1956,
         "lon": 29.0605,
         "wheelchair_accessible": true,
-        "updated_at": "2026-09-12T09:00:00Z"
+        "updated_at": "2026-09-22T10:00:00Z"
       }
     ],
-    "updated_at": "2026-09-12T09:00:00Z",
-    "source": "https://acikveri.bursa.bel.tr"
+    "updated_at": "2026-09-22T10:00:00Z"
   },
   {
     "stop_id": "BUR-01024",
@@ -38,10 +88,10 @@
     "lat": 40.1833,
     "lon": 29.071,
     "location_type": "stop",
+    "parent_station": null,
     "wheelchair_accessible": true,
     "shelter_type": "open",
     "has_bench": true,
-    "updated_at": "2026-09-12T09:00:00Z",
-    "source": "https://acikveri.bursa.bel.tr"
+    "updated_at": "2026-09-22T10:00:00Z"
   }
 ]
