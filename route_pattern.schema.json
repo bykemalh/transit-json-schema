@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TransitJSON RoutePattern",
-  "description": "Bir hattın belirli bir yöndeki somut güzergâh varyantı. Aynı route_id ve direction altında kısa dönüş, dal, ekspres veya farklı durak/shape dizileri ayrı pattern kayıtlarıdır.",
+  "description": "Bir hattın somut güzergâh varyantı. Aynı route_id altında kısa dönüş, dal, ekspres veya farklı durak/shape dizileri ayrı pattern kayıtlarıdır. Yön ve hedef bilgisi headsign ile, ring/döngü bilgisi is_loop ile ifade edilir.",
   "type": "object",
   "properties": {
     "pattern_id": {
@@ -13,27 +13,13 @@
       "type": "string",
       "minLength": 1
     },
-    "direction": {
-      "type": "integer",
-      "enum": [0, 1, 2],
-      "description": "0: tek/atanmamış yön, 1: gidiş, 2: dönüş. Döngü bilgisi direction yerine is_loop ile ifade edilir."
-    },
     "code": {
       "type": ["string", "null"],
       "description": "Kaynak sistemdeki güzergâh kodu; örn. İETT GUZERGAH_KODU."
     },
-    "name": {
-      "type": ["object", "null"],
-      "properties": {
-        "tr": { "type": "string" },
-        "en": { "type": "string" }
-      },
-      "required": ["tr"],
-      "additionalProperties": { "type": "string" }
-    },
     "headsign": {
       "type": ["string", "null"],
-      "description": "Bu varyant için yolcuya gösterilen hedef/yön metni."
+      "description": "Bu varyant için yolcuya gösterilen hedef/yön metni (tabeladaki hedef)."
     },
     "shape_id": {
       "type": ["string", "null"],
@@ -45,7 +31,7 @@
     },
     "is_default": {
       "type": "boolean",
-      "description": "Eski route+direction tüketicileri için seçilecek varsayılan varyant. Her route_id+direction grubunda en fazla bir kayıt true olmalıdır."
+      "description": "Bu varyantın ana/varsayılan güzergâh olup olmadığı."
     },
     "is_active": {
       "type": "boolean",
@@ -59,7 +45,6 @@
   "required": [
     "pattern_id",
     "route_id",
-    "direction",
     "is_loop",
     "is_default",
     "is_active",
