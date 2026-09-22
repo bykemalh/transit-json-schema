@@ -12,10 +12,10 @@ Every file in this directory is a self-contained JSON Schema describing a single
 | `city.schema.json` | `city` | City: URL-safe slug, IANA timezone, map center, default zoom, population, region code, website, open data URL. |
 | `agency.schema.json` | `agency` | Transit operator in a city (name, phone, website). |
 | `stop.schema.json` | `stop` | Stop or station (v2): accessibility flags, physical amenities, optional per-platform details with pattern linkage, parent station for metro entrances/exits. |
-| `route.schema.json` | `route` | Route: URL-safe slug, vehicle type, route pattern (round-trip / loop), stop mode (fixed / flexible), sort order, optional fare and color. |
-| `route_pattern.schema.json` | `route_pattern` | A concrete route variant such as a branch, short-turn, express or alternate alignment. |
+| `route.schema.json` | `route` | Route: URL-safe slug, vehicle type, stop mode (fixed / flexible), sort order, optional fare and color. |
+| `route_pattern.schema.json` | `route_pattern` | A concrete route variant (branch, short-turn, express) with headsign, loop state (`is_loop`), and shape link. |
 | `pattern_stop.schema.json` | `pattern_stop` | Ordered stops belonging to one route pattern. |
-| `trip.schema.json` | `trip` | A concrete scheduled trip linked to a route pattern. Direction comes from the pattern. |
+| `trip.schema.json` | `trip` | A concrete scheduled trip linked directly to a route pattern. |
 | `stop_time.schema.json` | `stop_time` | Departure times per trip/stop/sequence; `departure_time` is required for the first stop. |
 | `shape.schema.json` | `shape` | Route geometry as an ordered array of `lat`/`lon` points (no encoded polylines). |
 | `fare.schema.json` | `fare` | Fare definition: flat or stop-count-based pricing, tariff groups, per-route pricing, currency, payment methods, exit-validator refund (BursaRay "Gittiğin Kadar Öde" style). |
@@ -39,14 +39,15 @@ Unlike static entities, realtime records carry absolute RFC 3339 timestamps in `
 
 - **IDs** (`*_id`) are strings, unique project-wide where noted.
 - **Slugs** (`city`, `route`) are URL-safe, lowercase identifiers matching `^[a-z0-9]+(-[a-z0-9]+)*$`, used in API routes.
-- **Route names** do not include the route code. The code is stored separately in the `code` field. Example: `name: "Emek - Arabayatağı"`, `code: "M1"`.
-- **Direction codes** are used consistently across `route_pattern` and `shape`:
-  - `0` – single/unassigned direction
-  - `1` – outbound
-  - `2` – inbound
-- Platform direction is expressed through `pattern_ids` references rather than numeric codes.
-- Trip direction comes from its linked `route_pattern`, not from the trip itself.
-- Loop/ring geometry is represented by `route_pattern.is_loop`; a loop may still carry an outbound/inbound direction when the source system provides one.
+- **Route names** do not include the route code. The code is stored separately in the `code` field. Example: `name: "Kent Meydanı - Heykel"`, `code: "93"`.
+- **Pattern-based architecture**:
+  - Route topology and variants are defined exclusively through `route_patterns.json`.
+  - Ring/loop topology is defined by `route_pattern.is_loop`.
+  - Passenger-facing direction and destination are defined by `route_pattern.headsign`.
+  - Trips link directly to patterns via `trip.pattern_id`.
+  - Platform stops link to patterns via `stop.platforms.pattern_ids`.
+  - Geometries are referenced directly by `route_pattern.shape_id`.
+  - Numeric direction codes (`0, 1, 2`) are completely eliminated; all directional relationships are modeled through route patterns.
 - **Times** are local to the city timezone in `HH:MM:SS` format; values may exceed 24 hours (e.g. `25:30:00`) for trips crossing midnight.
 - **Timestamps** use RFC 3339 (`format: "date-time"`); dates use `format: "date"`.
 - **`updated_at`** is required in every entity.
@@ -70,13 +71,15 @@ Each fare record belongs to a **tariff group** (`tariff_group`). Transfer discou
 ## Route patterns and 0.6 notes
 
 - `route_patterns.json` is the canonical owner of a route variant; `pattern_stops.json` contains its stop order and `trips.pattern_id` selects it.
-- Multiple patterns and shapes may exist under the same `route_id` + `direction`.
-- `routes.route_pattern` is retained as a legacy route-level `round_trip` / `loop` classification. Exact loop state belongs to `route_patterns.is_loop`.
+- `routes.route_pattern` (`round_trip` / `loop`) was removed in 0.6. Route topology belongs exclusively to `route_patterns.is_loop`.
+- `route_patterns.name` was removed in 0.6. Use `headsign` for passenger-facing destination display.
+- Numeric direction codes (`0, 1, 2`) were completely removed from all schemas (`route_pattern`, `shape`, `trip`, `stop`, `vehicle`, `announcement`).
+- `shapes.direction` was removed in 0.6. Shapes are linked directly via `route_patterns.shape_id`.
 - `route_stops.json` was removed in 0.5. Use `pattern_stops.json`.
 - `holiday.json` was removed in 0.5. Use agency-based `calendar.json` (`date + agency_id -> applies_as`).
 - Shapes are plain coordinate arrays; encoded polyline is not used.
 - `bounds` was removed from `city.schema.json` in 0.6. Use `center` for map positioning.
-- `direction` was removed from `trip.schema.json` in 0.6. Direction comes from the linked `route_pattern`.
+- `direction` was removed from `trip.schema.json` in 0.6.
 - Platform `direction` (0/1/2) was replaced with `pattern_ids` in 0.6.
 - `source` was removed from all entity schemas in 0.6. Use `meta.json` for source information.
 - `transfer_duration` and `transfer_limit` were removed from `fare.schema.json` in 0.6. Use `transfer_rule.schema.json`.
