@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TransitJSON TransferRule",
+  "description": "Aktarma kuralı. Aktarma bir indirimdir — hedef tarifenin normal fiyatından düşülür: aktarmalı_biniş_ücreti = hedef_fiyat − discount_amount. Her yolcu kategorisi ve tarife grubu kombinasyonu için ayrı kayıt oluşturulur. Bir kategori için kayıt yoksa o kategoride aktarma indirimi uygulanmaz.",
+  "type": "object",
+  "properties": {
+    "transfer_rule_id": {
+      "type": "string",
+      "description": "Proje genelinde tekil. Örn. 'BUR-IND1-TAM'."
+    },
+    "agency_id": {
+      "type": "string",
+      "description": "Bu aktarma kuralının ait olduğu ajans."
+    },
+    "name": {
+      "type": "object",
+      "properties": {
+        "tr": { "type": "string" },
+        "en": { "type": "string" }
+      },
+      "required": ["tr"],
+      "additionalProperties": { "type": "string" },
+      "description": "Çoklu dil isim nesnesi. 'tr' zorunludur."
+    },
+    "category": {
+      "type": "string",
+      "description": "Bu kuralın geçerli olduğu yolcu kategorisi (standard, reduced, student vb.). fare.schema.json'daki category ile eşleşir."
+    },
+    "from_route_ids": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Hangi hatlardan gelince geçerli (routes.json içindeki route_id). null = herhangi bir hat."
+    },
+    "to_route_ids": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Hangi hatlara binince geçerli (routes.json içindeki route_id). null = herhangi bir hat."
+    },
+    "from_vehicle_types": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string",
+        "enum": [
+          "bus",
+          "tram",
+          "metro",
+          "rail",
+          "ferry",
+          "cable_tram",
+          "gondola",
+          "funicular",
+          "trolleybus",
+          "monorail",
+          "minibus",
+          "coach",
+          "water_taxi"
+        ]
+      },
+      "description": "Hangi araç tiplerinden gelince geçerli. null = herhangi bir araç tipi."
+    },
+    "to_vehicle_types": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string",
+        "enum": [
+          "bus",
+          "tram",
+          "metro",
+          "rail",
+          "ferry",
+          "cable_tram",
+          "gondola",
+          "funicular",
+          "trolleybus",
+          "monorail",
+          "minibus",
+          "coach",
+          "water_taxi"
+        ]
+      },
+      "description": "Hangi araç tiplerine binince geçerli. null = herhangi bir araç tipi."
+    },
+    "from_tariff_groups": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "description": "Hangi tarife gruplarından gelince geçerli (fare.tariff_group ile eşleşir). null = herhangi bir tarife grubu."
+    },
+    "discount_amount": {
+      "type": "number",
+      "minimum": 0,
+      "description": "İndirim miktarı. Hedef tarifenin normal ücretinden bu kadar düşülür. 0 = indirim yok (aktarma yasağı kuralları için max_transfers: 0 ile birlikte kullanılır)."
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO 4217 para birimi kodu."
+    },
+    "duration_minutes": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Aktarma süresi (dakika). İlk binişten itibaren sayılır, her yeni binişte sıfırlanmaz. 0 = aktarma yasağı."
+    },
+    "max_transfers": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Süre içinde maksimum aktarma indirimi hakkı. 0 = aktarma yapılamaz."
+    },
+    "terminates_chain": {
+      "type": "boolean",
+      "description": "true ise bu indirim uygulandıktan sonra başka aktarma indirimi yapılamaz (zincir kapanır). Tarife grubu 6-9 gibi özel kurallar için kullanılır."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "transfer_rule_id",
+    "agency_id",
+    "name",
+    "category",
+    "discount_amount",
+    "currency",
+    "duration_minutes",
+    "max_transfers",
+    "terminates_chain",
+    "updated_at"
+  ],
+  "additionalProperties": false
+}
+
