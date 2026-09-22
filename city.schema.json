@@ -17,19 +17,11 @@
     "name": {
       "type": "object",
       "properties": {
-        "tr": {
-          "type": "string"
-        },
-        "en": {
-          "type": "string"
-        }
+        "tr": { "type": "string" },
+        "en": { "type": "string" }
       },
-      "required": [
-        "tr"
-      ],
-      "additionalProperties": {
-        "type": "string"
-      },
+      "required": ["tr"],
+      "additionalProperties": { "type": "string" },
       "description": "Çoklu dil isim nesnesi. 'tr' zorunludur, diğer dil kodları (en, ar, de vb.) opsiyoneldir."
     },
     "timezone": {
@@ -51,10 +43,7 @@
           "maximum": 180
         }
       },
-      "required": [
-        "lat",
-        "lon"
-      ],
+      "required": ["lat", "lon"],
       "additionalProperties": false
     },
     "default_zoom": {
@@ -62,44 +51,28 @@
       "minimum": 1,
       "maximum": 20
     },
-    "bounds": {
-      "type": "object",
-      "properties": {
-        "north": {
-          "type": "number",
-          "minimum": -90,
-          "maximum": 90
-        },
-        "south": {
-          "type": "number",
-          "minimum": -90,
-          "maximum": 90
-        },
-        "east": {
-          "type": "number",
-          "minimum": -180,
-          "maximum": 180
-        },
-        "west": {
-          "type": "number",
-          "minimum": -180,
-          "maximum": 180
-        }
-      },
-      "required": [
-        "north",
-        "south",
-        "east",
-        "west"
-      ],
-      "additionalProperties": false
+    "population": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Şehir nüfusu."
+    },
+    "region_code": {
+      "type": ["string", "null"],
+      "description": "İdari bölge/il kodu. Örn. plaka kodu '16'."
+    },
+    "website": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "Resmi belediye/ulaşım web sitesi."
+    },
+    "open_data_url": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "Açık veri portalı URL'i."
     },
     "updated_at": {
       "type": "string",
       "format": "date-time"
-    },
-    "source": {
-      "type": "string"
     }
   },
   "required": [
