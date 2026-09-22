@@ -183,9 +183,6 @@
       "type": "string",
       "format": "date-time",
       "description": "Bu duyuru kaydının son güncellendiği an (RFC 3339)."
-    },
-    "source": {
-      "type": "string"
     }
   },
   "required": [
