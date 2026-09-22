@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TransitJSON Place",
+  "description": "Toplu taşıma ile ilişkili belediye ve istasyon noktaları: bilet satış gişeleri, kart dolum otomatları, paylaşımlı bisiklet istasyonları, seyahat kartları merkezleri, taksi durakları vb. Durağa bağlı noktalar stop_id ile durakla ilişkilendirilir.",
+  "type": "object",
+  "properties": {
+    "place_id": {
+      "type": "string",
+      "description": "Proje genelinde tekil nokta kimliği. Örn. 'BUR-PLC-0102'."
+    },
+    "city_id": {
+      "type": "string",
+      "description": "Noktanın bulunduğu şehir (cities.json içindeki city_id)."
+    },
+    "stop_id": {
+      "type": ["string", "null"],
+      "description": "Bu nokta belirli bir durağa veya istasyona ait/yakın ise durağın stop_id'si. Bağımsız noktalar için null."
+    },
+    "name": {
+      "type": "object",
+      "properties": {
+        "tr": { "type": "string" },
+        "en": { "type": "string" }
+      },
+      "required": ["tr"],
+      "additionalProperties": { "type": "string" },
+      "description": "Çoklu dil isim nesnesi. 'tr' zorunludur."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "card_recharge",
+        "ticket_kiosk",
+        "customer_center",
+        "bike_station",
+        "taxi_stand",
+        "park_and_ride",
+        "lost_and_found",
+        "wc",
+        "other"
+      ],
+      "description": "Nokta türü. card_recharge: kart dolum otomatı/cihazı, ticket_kiosk: bilet/kart satış noktası, customer_center: ulaşım/kart başvuru merkezi, bike_station: belediye paylaşımlı bisiklet istasyonu, taxi_stand: bağlantılı taksi durağı, park_and_ride: aktarma otoparkı, lost_and_found: kayıp eşya bürosu, wc: istasyon/meydan tuvaleti, other: diğer."
+    },
+    "lat": {
+      "type": "number",
+      "minimum": -90,
+      "maximum": 90
+    },
+    "lon": {
+      "type": "number",
+      "minimum": -180,
+      "maximum": 180
+    },
+    "address": {
+      "type": ["string", "null"],
+      "description": "Açık adres veya konum tarifi."
+    },
+    "opening_hours": {
+      "type": ["string", "null"],
+      "description": "Çalışma saatleri. Örn. '08:00-18:00', '24/7'."
+    },
+    "payment_methods": {
+      "type": ["array", "null"],
+      "items": {
+        "type": "string",
+        "enum": [
+          "cash",
+          "smart_card",
+          "credit_card",
+          "mobile",
+          "contactless",
+          "qr"
+        ]
+      },
+      "description": "Dolum/satış noktalarında kabul edilen ödeme yöntemleri."
+    },
+    "is_active": {
+      "type": "boolean",
+      "description": "Noktanın faal olup olmadığı (arızalı/kapalı otomat ve gişeler için false)."
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "place_id",
+    "city_id",
+    "name",
+    "type",
+    "lat",
+    "lon",
+    "is_active",
+    "updated_at"
+  ],
+  "additionalProperties": false
+}

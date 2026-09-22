@@ -15,6 +15,7 @@ Every file in this directory is a self-contained JSON Schema describing a single
 | `route.schema.json` | `route` | Route: URL-safe slug, vehicle type, stop mode (fixed / flexible), sort order, optional fare and color. |
 | `route_pattern.schema.json` | `route_pattern` | A concrete route variant (branch, short-turn, express) with headsign, loop state (`is_loop`), and shape link. |
 | `pattern_stop.schema.json` | `pattern_stop` | Ordered stops belonging to one route pattern. |
+| `place.schema.json` | `place` | Transit-related municipal points: card recharge kiosks, ticket sales points, shared bike stations, customer centers, taxi stands. Optional linkage to stops via `stop_id`. |
 | `trip.schema.json` | `trip` | A concrete scheduled trip linked directly to a route pattern. |
 | `stop_time.schema.json` | `stop_time` | Departure times per trip/stop/sequence; `departure_time` is required for the first stop. |
 | `shape.schema.json` | `shape` | Route geometry as an ordered array of `lat`/`lon` points (no encoded polylines). |

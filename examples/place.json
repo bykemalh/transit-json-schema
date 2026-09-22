@@ -1,0 +1,84 @@
+[
+  {
+    "place_id": "BUR-PLC-001",
+    "city_id": "BUR-16",
+    "stop_id": "BUR-01023",
+    "name": {
+      "tr": "Kent Meydanı BursaKart Dolum Otomatı",
+      "en": "Kent Square BursaKart Recharge Kiosk"
+    },
+    "type": "card_recharge",
+    "lat": 40.1956,
+    "lon": 29.0605,
+    "address": "Santral Garaj Mah. Kent Meydanı AVM önü",
+    "opening_hours": "24/7",
+    "payment_methods": [
+      "cash",
+      "credit_card",
+      "contactless"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-22T10:00:00Z"
+  },
+  {
+    "place_id": "BUR-PLC-002",
+    "city_id": "BUR-16",
+    "stop_id": null,
+    "name": {
+      "tr": "Şehreküstü Seyahat Kartları Merkezi",
+      "en": "Sehrekustu Travel Cards Center"
+    },
+    "type": "customer_center",
+    "lat": 40.187,
+    "lon": 29.062,
+    "address": "Şehreküstü İstasyonu Alt Çarşısı No:12",
+    "opening_hours": "08:30-17:30",
+    "payment_methods": [
+      "cash",
+      "credit_card"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-22T10:00:00Z"
+  },
+  {
+    "place_id": "BUR-PLC-003",
+    "city_id": "BUR-16",
+    "stop_id": "BUR-STA-OSMANGAZI",
+    "name": {
+      "tr": "Osmangazi Akıllı Bisiklet İstasyonu",
+      "en": "Osmangazi Shared Bike Station"
+    },
+    "type": "bike_station",
+    "lat": 40.1942,
+    "lon": 29.0555,
+    "address": "Osmangazi Metro İstasyonu Çıkışı",
+    "opening_hours": "24/7",
+    "payment_methods": [
+      "credit_card",
+      "mobile"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-22T10:00:00Z"
+  },
+  {
+    "place_id": "BUR-PLC-004",
+    "city_id": "BUR-16",
+    "stop_id": "BUR-01024",
+    "name": {
+      "tr": "Heykel Bilet Satış Noktası",
+      "en": "Heykel Ticket Sales Kiosk"
+    },
+    "type": "ticket_kiosk",
+    "lat": 40.1834,
+    "lon": 29.0712,
+    "address": "Heykel Atatürk Anıtı yanı",
+    "opening_hours": "07:30-20:00",
+    "payment_methods": [
+      "cash",
+      "credit_card",
+      "contactless"
+    ],
+    "is_active": true,
+    "updated_at": "2026-09-22T10:00:00Z"
+  }
+]

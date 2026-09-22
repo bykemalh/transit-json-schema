@@ -13,6 +13,7 @@
     "country",
     "fare",
     "pattern_stop",
+    "place",
     "route",
     "route_pattern",
     "shape",
