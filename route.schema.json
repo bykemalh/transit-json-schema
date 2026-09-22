@@ -58,14 +58,6 @@
       "type": ["string", "null"],
       "description": "Bu hat için geçerli ücret tanımı. fares.json'daki fare_id'ye referans verir. Opsiyonel/null — yoksa bu hat için tanımlı özel bir ücret yok kabul edilir."
     },
-    "route_pattern": {
-      "type": "string",
-      "enum": [
-        "round_trip",
-        "loop"
-      ],
-      "description": "Geriye uyumlu hat topolojisi sınıflandırmasıdır; route_patterns koleksiyonundaki güzergâh varyantı ile karıştırılmamalıdır. round_trip: genel olarak çift yönlü hat, loop: genel olarak ring hat. Bir hattın farklı varyantları için kesin loop bilgisi route_patterns.is_loop alanındadır."
-    },
     "stop_mode": {
       "type": "string",
       "enum": [
@@ -90,7 +82,6 @@
     "agency_id",
     "name",
     "vehicle_type",
-    "route_pattern",
     "stop_mode",
     "updated_at"
   ],
