@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TransitJSON Stop",
-  "description": "TransitJSON v2 — Durak. Erişilebilirlik flag'leri, fiziksel özellikler ve opsiyonel platform dizisi içerir. Tüm yeni alanlar opsiyoneldir; mevcut v1 kayıtları eksik/null bırakılarak da geçerlidir.",
+  "description": "TransitJSON v2 — Durak. Erişilebilirlik flag'leri, fiziksel özellikler ve opsiyonel platform dizisi içerir. parent_station ile metro istasyonu giriş/çıkış kapıları ve alt duraklar ana istasyona bağlanır. Tüm yeni alanlar opsiyoneldir; mevcut v1 kayıtları eksik/null bırakılarak da geçerlidir.",
   "type": "object",
   "properties": {
     "stop_id": {
@@ -14,19 +14,11 @@
     "name": {
       "type": "object",
       "properties": {
-        "tr": {
-          "type": "string"
-        },
-        "en": {
-          "type": "string"
-        }
+        "tr": { "type": "string" },
+        "en": { "type": "string" }
       },
-      "required": [
-        "tr"
-      ],
-      "additionalProperties": {
-        "type": "string"
-      },
+      "required": ["tr"],
+      "additionalProperties": { "type": "string" },
       "description": "Çoklu dil isim nesnesi. 'tr' zorunludur, diğer dil kodları (en, ar, de vb.) opsiyoneldir."
     },
     "lat": {
@@ -40,129 +32,73 @@
       "maximum": 180
     },
     "location_type": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        "stop",
-        "station",
-        "entrance",
-        "generic_node",
-        null
-      ],
-      "description": "GTFS uyumlu konum tipi. stop: basit durak. station: istasyon/kompleks (birden fazla platform içerebilir). entrance: istasyon girişi. generic_node: yolcu erişimi olmayan geometrik nokta. null ise 'stop' kabul edilir."
+      "type": ["string", "null"],
+      "enum": ["stop", "station", "entrance", "generic_node", null],
+      "description": "GTFS uyumlu konum tipi. stop: basit durak. station: istasyon/kompleks (birden fazla platform içerebilir). entrance: istasyon girişi/çıkışı. generic_node: yolcu erişimi olmayan geometrik nokta. null ise 'stop' kabul edilir."
+    },
+    "parent_station": {
+      "type": ["string", "null"],
+      "description": "Bu kayıt bir alt durak, giriş/çıkış kapısı veya platform ise üst istasyonun stop_id'si. location_type=station olan ana istasyon kayıtları için null. Örn. entrance 'BUR-ENT-OSMANGAZI-A' → parent_station 'BUR-STA-OSMANGAZI'."
     },
     "wheelchair_accessible": {
-      "type": [
-        "boolean",
-        "null"
-      ],
+      "type": ["boolean", "null"],
       "description": "Tekerlekli sandalye ile durağa/durağın içine erişilebilir mi? null = bilinmiyor."
     },
     "has_ramp": {
-      "type": [
-        "boolean",
-        "null"
-      ],
+      "type": ["boolean", "null"],
       "description": "Rampa var mı?"
     },
     "has_elevator": {
-      "type": [
-        "boolean",
-        "null"
-      ],
+      "type": ["boolean", "null"],
       "description": "Asansör var mı?"
     },
     "has_tactile_paving": {
-      "type": [
-        "boolean",
-        "null"
-      ],
+      "type": ["boolean", "null"],
       "description": "Görme engelliler için taktil yüzey var mı?"
     },
     "has_audio_announcement": {
-      "type": [
-        "boolean",
-        "null"
-      ],
+      "type": ["boolean", "null"],
       "description": "Sesli yaklaşan araç/hat anonsu var mı?"
     },
     "has_braille_signage": {
-      "type": [
-        "boolean",
-        "null"
-      ],
+      "type": ["boolean", "null"],
       "description": "Braille tabela var mı?"
     },
     "shelter_type": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        "none",
-        "open",
-        "closed",
-        "heated",
-        null
-      ],
+      "type": ["string", "null"],
+      "enum": ["none", "open", "closed", "heated", null],
       "description": "Bekleme alanı türü. none: bekleme alanı yok. open: yarı kapalı/peron üstü örtü. closed: tam kapalı durak (camekanlı). heated: kapalı + ısıtmalı. null = bilinmiyor."
     },
     "has_bench": {
-      "type": [
-        "boolean",
-        "null"
-      ],
+      "type": ["boolean", "null"],
       "description": "Oturma yeri var mı?"
     },
     "has_lighting": {
-      "type": [
-        "boolean",
-        "null"
-      ],
+      "type": ["boolean", "null"],
       "description": "Aydınlatma var mı?"
     },
     "has_real_time_display": {
-      "type": [
-        "boolean",
-        "null"
-      ],
+      "type": ["boolean", "null"],
       "description": "Canlı kalkış saati ekranı var mı?"
     },
     "has_ticket_machine": {
-      "type": [
-        "boolean",
-        "null"
-      ],
+      "type": ["boolean", "null"],
       "description": "Bilet makinesi var mı?"
     },
     "has_trash_bin": {
-      "type": [
-        "boolean",
-        "null"
-      ],
+      "type": ["boolean", "null"],
       "description": "Çöp kutusu var mı?"
     },
     "has_wifi": {
-      "type": [
-        "boolean",
-        "null"
-      ],
+      "type": ["boolean", "null"],
       "description": "Ücretsiz WiFi var mı?"
     },
     "has_security_camera": {
-      "type": [
-        "boolean",
-        "null"
-      ],
+      "type": ["boolean", "null"],
       "description": "Güvenlik kamerası var mı?"
     },
     "has_bike_rack": {
-      "type": [
-        "boolean",
-        "null"
-      ],
+      "type": ["boolean", "null"],
       "description": "Bisiklet parkı var mı?"
     },
     "platforms": {
@@ -173,28 +109,17 @@
         "properties": {
           "platform_id": {
             "type": "string",
-            "description": "Durak içinde tekil. Örn. 'BUR-01023-P1' veya 'A'."
+            "description": "Durak içinde tekil. Örn. 'BUR-STA-OSMANGAZI-P1' veya 'A'."
           },
           "code": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "description": "İnsan-okunur platform kodu (A, B, 1, 2, vb.)."
           },
-            "direction": {
-              "type": [
-                "integer",
-                "null"
-              ],
-              "enum": [
-                0,
-                1,
-                2,
-                null
-              ],
-              "description": "0: loop (tek yön döngü), 1: gidiş, 2: dönüş, null: yöne özgü değil (örn. genel bekleme alanı)."
-            },
+          "pattern_ids": {
+            "type": ["array", "null"],
+            "items": { "type": "string" },
+            "description": "Bu platformu kullanan güzergâh varyantları (route_patterns.json içindeki pattern_id'lere referans). Yön bilgisi pattern üzerinden gelir. null = bilinmiyor/henüz bağlanmamış."
+          },
           "lat": {
             "type": "number",
             "minimum": -90,
@@ -206,87 +131,42 @@
             "maximum": 180
           },
           "wheelchair_accessible": {
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "type": ["boolean", "null"]
           },
           "has_elevator": {
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "type": ["boolean", "null"]
           },
           "has_ramp": {
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "type": ["boolean", "null"]
           },
           "has_tactile_paving": {
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "type": ["boolean", "null"]
           },
           "has_audio_announcement": {
-            "type": [
-              "boolean",
-              "null"
-            ]
-          },
-          "has_shelter": {
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "type": ["boolean", "null"]
           },
           "shelter_type": {
-            "type": [
-              "string",
-              "null"
-            ],
-            "enum": [
-              "none",
-              "open",
-              "closed",
-              "heated",
-              null
-            ]
+            "type": ["string", "null"],
+            "enum": ["none", "open", "closed", "heated", null]
           },
           "has_bench": {
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "type": ["boolean", "null"]
           },
           "has_lighting": {
-            "type": [
-              "boolean",
-              "null"
-            ]
+            "type": ["boolean", "null"]
           },
           "updated_at": {
             "type": "string",
             "format": "date-time"
-          },
-          "source": {
-            "type": "string"
           }
         },
-        "required": [
-          "platform_id",
-          "updated_at"
-        ],
+        "required": ["platform_id", "updated_at"],
         "additionalProperties": false
       }
     },
     "updated_at": {
       "type": "string",
       "format": "date-time"
-    },
-    "source": {
-      "type": "string"
     }
   },
   "required": [
