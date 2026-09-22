@@ -74,14 +74,15 @@
       ],
       "description": "fixed: tüm ara duraklar tanımlı. flexible: sadece ilk/son durak tanımlı, arası serbest biniş."
     },
+    "sort_order": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Hatların gösterim sırası. Düşük değer önce gösterilir. null = sıra belirlenmemiş."
+    },
     "updated_at": {
       "type": "string",
       "format": "date-time"
-    },
-    "source": {
-      "type": "string"
     }
-
   },
   "required": [
     "route_id",
