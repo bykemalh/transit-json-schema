@@ -11,32 +11,73 @@
     "name": {
       "type": "object",
       "properties": {
-        "tr": {
-          "type": "string"
-        },
-        "en": {
-          "type": "string"
-        }
+        "tr": { "type": "string" },
+        "en": { "type": "string" }
       },
-      "required": [
-        "tr"
-      ],
-      "additionalProperties": {
-        "type": "string"
-      },
+      "required": ["tr"],
+      "additionalProperties": { "type": "string" },
       "description": "Çoklu dil isim nesnesi. 'tr' zorunludur, diğer dil kodları (en, ar, de vb.) opsiyoneldir."
+    },
+    "iso_alpha3": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO 3166-1 alpha-3 ülke kodu, örn. TUR"
+    },
+    "default_language": {
+      "type": "string",
+      "pattern": "^[a-z]{2}$",
+      "description": "Ülkenin varsayılan dil kodu. name nesnelerinde bu dil zorunludur. Örn. tr"
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z]{2}$"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Ülkede desteklenen dil kodları listesi. Örn. ['tr', 'ku', 'ar']"
+    },
+    "currency_code": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO 4217 para birimi kodu. Örn. TRY, EUR, USD"
+    },
+    "phone_prefix": {
+      "type": "string",
+      "pattern": "^\\+[0-9]{1,4}$",
+      "description": "Uluslararası telefon ön eki. Örn. +90"
+    },
+    "continent": {
+      "type": "string",
+      "enum": [
+        "africa",
+        "antarctica",
+        "asia",
+        "europe",
+        "north_america",
+        "oceania",
+        "south_america"
+      ],
+      "description": "Kıta. africa, antarctica, asia, europe, north_america, oceania, south_america"
+    },
+    "emoji_flag": {
+      "type": "string",
+      "description": "Emoji bayrak. Örn. 🇹🇷"
     },
     "updated_at": {
       "type": "string",
       "format": "date-time"
-    },
-    "source": {
-      "type": "string"
     }
   },
   "required": [
     "country_id",
     "name",
+    "iso_alpha3",
+    "default_language",
+    "languages",
+    "currency_code",
+    "continent",
     "updated_at"
   ],
   "additionalProperties": false
