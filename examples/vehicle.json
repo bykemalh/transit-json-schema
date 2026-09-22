@@ -3,7 +3,6 @@
   "license_plate": "16 BUR 4025",
   "trip_id": "BUR-93-P1-monday-0600",
   "route_id": "BUR-93",
-  "direction": 1,
   "position": {
     "lat": 40.19,
     "lon": 29.065,

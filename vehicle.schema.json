@@ -29,19 +29,6 @@
       ],
       "description": "Aracın bulunduğu hat (routes.json içindeki route_id). Seferden türetilebilir; sorgu kolaylığı için tekrarlanır."
     },
-    "direction": {
-      "type": [
-        "integer",
-        "null"
-      ],
-      "enum": [
-        0,
-        1,
-        2,
-        null
-      ],
-      "description": "0: loop (tek yön döngü), 1: gidiş, 2: dönüş. null = bilinmiyor."
-    },
     "position": {
       "type": "object",
       "description": "Aracın anlık konumu.",
